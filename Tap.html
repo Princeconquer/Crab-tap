@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crap tap</title>
+</head>
+<body>
+    <nav>
+        <h3 style="float: left;">Time left : <em id="time" style="color: black; font-size: 30px;">60s</em></h3>
+<h3 id="bro">Money : <em id="up" style="color: black;">$0.00</em></h3>
+    </nav>
+    <div id="popups">
+        <h2>Time elapsed</h2>
+        <ul>
+            <li>Buy more time</li>
+            <li>Call : 09150952544 for payment</li>
+            <li>Cash out money</li>
+        </ul>
+    <h3 id="yo">Money earned :<input type="text" id="earned" value="0.000" disabled></h3>
+    </div>
+    <div id="all">
+    <div id="cont">
+        <div id="tap">
+        </div>
+    </div>
+    <h1 id="counter">Tap to get rich🤑</h1>
+</div>
+    <style>
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background:darkblue;
+    height: 100vh;
+    overflow-x: hidden;
+    transition: background 1s;
+}
+nav{
+    width: 100%;
+    background:linear-gradient(aqua, transparent);
+    height: 70px;
+    filter: drop-shadow(0 0 30px);
+    display: flex;
+}
+#cont{
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(red,blue,green);
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 50%;;
+    
+}
+#tap{
+    width: 350px;
+    height: 350px;
+    background-color: #1b1b19;
+    margin: auto;
+    border-radius: 50%;
+    cursor: pointer;
+}
+nav h3{
+color:lightblue;
+float: right;
+margin: 10px;
+margin-right: 30px;
+}
+#tap:active{
+    background-color: #1b1b1bb1;
+    transition: backround 500ms;
+}
+#popups h2{
+    text-align: center;
+    text-decoration: underline;
+}
+input{
+background: none;
+border: none;
+}
+#counter{
+    text-align: center;;
+    font-size: 50px;
+    margin-top: 20px;
+    color: turquoise;
+}
+@keyframes come{
+    0%{scale: .3};
+    100%{scale: 1};
+}
+@keyframes tap {
+    0%{box-shadow:  0 0 40px gold}
+    100%{box-shadow:  0 0 40px gold}
+}
+.glow{
+    animation: tap 500ms ease;
+}
+.comeout{
+animation: come 500ms ease;
+}
+#popups{
+    width:350px ;
+    height: 340px;
+    padding-top: 10px;
+    background-color: #555;
+    border-radius: 20px ;
+    display: none;
+    border: 5px solid black;
+    margin: auto;
+    color: #eee;
+}
+#popups ul{
+    margin: 30px;
+    font-size: 30px;
+    list-style:circle;
+}
+#popups li{
+    margin-top: 35px;
+    transition: all 100ms ease;
+    width: fit-content;
+    cursor: pointer;
+    width: 100%;
+}
+#popups li:hover{
+    border-left: 3px solid blue;
+    background-color: moccasin;
+}
+#popups h3{
+position: absolute;
+left: 200px;
+color: honeydew;
+}
+#earned{
+    text-align: end;
+    color: aqua;
+    font-size: 20px;
+    left: 4px;
+    letter-spacing: 2px;
+    width: 70px;
+}
+#bro{
+    position: absolute;
+    right: 0;
+}
+@media(max-width:992px){
+    body{
+        background-color: red;
+    }
+    #earned{
+        color: aqua;
+    }
+    #popups h3{
+        color: #222;
+    }
+}
+/* for phone */
+@media(max-width:400px){
+    body{
+        background-color: green;
+    }
+    #earned{
+        color: aqua;
+        font-size: 15px;
+    }
+    #popups h3{
+        color: #222;
+    }
+    #tap{
+        width: 300px;
+        height: 300px;
+    }
+    #cont{
+        width: 350px;
+        height: 350px;
+    }
+    #up{
+        width: 100px;
+        font-size: 20px;
+    }
+    #popups li{
+        font-size: 20px;
+    }
+    #yo{
+        margin-right: 30px;
+    }
+}
+
+    </style>
+    <script>
+        let tap = document.getElementById('tap');
+        let cont = document.getElementById('cont');
+        let counter = document.getElementById('counter');
+        let count = 0;
+        let up = document.getElementById('up');
+        let earned = document.getElementById("earned");
+        let countup = 0;
+
+        function tapCount(){
+        counter.innerHTML = count;
+        count = count + 1;
+        countup = countup + 0.05;
+        tap.classList.toggle('glow')
+        let deduct = countup - 0;
+        up.innerHTML = deduct;
+        earned.value = '$' + up.textContent;
+        up.textContent = '$' + deduct;
+        
+        }
+ cont.addEventListener('click', () =>{
+    document.addEventListener("mousemove", tapCount(),doTimer());
+ });
+
+if(count > 5){
+    alert("ok")
+}
+        let c = 60;
+var t;
+var timer_is_on=0;
+let pop = document.getElementById('popups');
+function timedCount()
+{
+document.getElementById('time').innerHTML = c;
+c=c-1;
+t=setTimeout(function(){timedCount()},1000);
+
+setTimeout(function(){
+clearTimeout(t)
+pop.classList.add('comeout');
+cont.style.display = "none"
+pop.style.display = 'block';
+},61000)
+}
+
+function doTimer()
+{
+
+if (!timer_is_on)
+  {
+  timer_is_on=1;
+  timedCount();
+  }
+}
+    </script>
+</body>
+</html>
